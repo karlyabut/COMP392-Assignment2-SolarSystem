@@ -52,7 +52,7 @@ var objects;
             camera.lookAt(planet2.position);
         };
         Control.prototype.zoomOut = function () {
-            camera.position.set(-110, 110, 110);
+            camera.position.set(-100, 100, 100);
             camera.lookAt(scene.position);
         };
         return Control;

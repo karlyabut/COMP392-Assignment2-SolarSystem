@@ -166,9 +166,9 @@ function setupRenderer() {
 // Setup main camera for the scene
 function setupCamera() {
     camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.x = -110;
-    camera.position.y = 110;
-    camera.position.z = 110;
+    camera.position.x = -100;
+    camera.position.y = 100;
+    camera.position.z = 100;
     camera.lookAt(scene.position);
     console.log("Finished setting up Camera...");
 }

@@ -73,7 +73,7 @@ module objects {
          }
         
          public zoomOut(): void {
-             camera.position.set(-110, 110, 110);
+             camera.position.set(-100, 100, 100);
              camera.lookAt(scene.position);
              
          }
