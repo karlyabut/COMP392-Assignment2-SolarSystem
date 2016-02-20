@@ -47,8 +47,8 @@ var planet2;
 var planet3;
 var planet4;
 var planet5;
-var planets = [planet1, planet2, planet3, planet4, planet5];
-var moons;
+var moon1;
+var moon2;
 var zoom;
 //--------------------
 var plane;
@@ -80,7 +80,7 @@ function init() {
     console.log("Added Spot Light to Scene");
     // add controls
     gui = new GUI();
-    //control = new Control();
+    control = new Control(0.01, 0.01, 0.01, 60, 40);
     addControl(control);
     // Add framerate stats
     addStatsObject();
@@ -110,6 +110,12 @@ function init() {
     planet5 = new planet(new THREE.SphereGeometry(2, 32, 32), 30, 30, 30, -0.020, 65, sun.position);
     scene.add(planet5);
     console.log("added planet");
+    moon1 = new planet(new THREE.SphereGeometry(1, 32, 32), 30, 30, 30, -0.020, 5, planet4.position);
+    scene.add(moon1);
+    console.log("added planet");
+    moon2 = new planet(new THREE.SphereGeometry(1, 32, 32), 30, 30, 30, 1, 5, planet2.position);
+    scene.add(moon2);
+    console.log("added planet");
     document.body.appendChild(renderer.domElement);
     gameLoop(); // render the scene	
     window.addEventListener('resize', onResize, false);
@@ -120,6 +126,8 @@ function onResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 function addControl(controlObject) {
+    gui.add(controlObject, "zoomIn");
+    gui.add(controlObject, "zoomOut");
 }
 function addStatsObject() {
     stats = new Stats();
@@ -139,6 +147,9 @@ function gameLoop() {
     planet3.update();
     planet4.update();
     planet5.update();
+    moon1.update();
+    moon2.update();
+    //control.zoomIn();
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
     // render the scene
@@ -157,7 +168,7 @@ function setupCamera() {
     camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.x = -110;
     camera.position.y = 110;
-    camera.position.z = 30;
+    camera.position.z = 110;
     camera.lookAt(scene.position);
     console.log("Finished setting up Camera...");
 }

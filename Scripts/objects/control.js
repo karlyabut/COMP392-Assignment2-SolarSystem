@@ -47,20 +47,13 @@ var objects;
         //     this.zoomIn(4);
         //     zoom[4] = true;
         // }
-        // public zoomIn(num: number): void {
-        //     camera.position.set(planets[num].position.x - 25, planets[num].position.y + 25, planets[num].position.z + 25);
-        //     camera.lookAt(planets[num].position);
-        // }
-        // public zoomOut(): void {
-        //     camera.position.set(-110, 110, 110);
-        //     camera.lookAt(scene.position);
-        //     for (var i = 0; i < zoom.length; i++) {
-        //         zoom[i] = false;   
-        //     } 
-        // }
-        // show scene objects
-        Control.prototype.outputObjects = function () {
-            console.log(scene.children);
+        Control.prototype.zoomIn = function () {
+            camera.position.set(planet2.position.x - 25, planet2.position.y + 25, planet2.position.z + 25);
+            camera.lookAt(planet2.position);
+        };
+        Control.prototype.zoomOut = function () {
+            camera.position.set(-110, 110, 110);
+            camera.lookAt(scene.position);
         };
         return Control;
     })();

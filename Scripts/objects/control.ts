@@ -12,6 +12,7 @@ module objects {
         public rotationSpeedY: number;
         public rotationSpeedZ: number;
         public numberOfObjects: number;
+
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++
         constructor(rotationSpeedX: number, rotationSpeedY: number, rotationSpeedZ: number, planeWidth: number, planeHeight: number) {
             this.rotationSpeedX = rotationSpeedX;
@@ -21,6 +22,9 @@ module objects {
             this._planeWidth = planeWidth;
             this._planeHeight = planeHeight;
         }
+        
+       
+      
         
         //  public zoomPlanet1(): void {
         //     for (var i = 0; i < zoom.length; i++) {
@@ -63,22 +67,15 @@ module objects {
         //     zoom[4] = true;
         // }
         
-        // public zoomIn(num: number): void {
-        //     camera.position.set(planets[num].position.x - 25, planets[num].position.y + 25, planets[num].position.z + 25);
-        //     camera.lookAt(planets[num].position);
-        // }
+         public zoomIn(): void {
+             camera.position.set(planet2.position.x - 25, planet2.position.y + 25, planet2.position.z + 25);
+             camera.lookAt(planet2.position);
+         }
         
-        // public zoomOut(): void {
-        //     camera.position.set(-110, 110, 110);
-        //     camera.lookAt(scene.position);
-        //     for (var i = 0; i < zoom.length; i++) {
-        //         zoom[i] = false;   
-        //     } 
-        // }
-        
-        // show scene objects
-        public outputObjects(): void {
-            console.log(scene.children);
-        }
+         public zoomOut(): void {
+             camera.position.set(-110, 110, 110);
+             camera.lookAt(scene.position);
+             
+         }
     }
 }
