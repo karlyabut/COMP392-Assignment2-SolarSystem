@@ -59,6 +59,8 @@ var control;
 var gui;
 var stats;
 var step = 0;
+var planeGeometry;
+var planeMaterial;
 var texture;
 function init() {
     // Instantiate a new Scene object
@@ -84,6 +86,18 @@ function init() {
     addControl(control);
     // Add framerate stats
     addStatsObject();
+    planeGeometry = new PlaneGeometry(100, 100, 100);
+    planeMaterial = new LambertMaterial({ map: THREE.ImageUtils.loadTexture('images/notbad.png') });
+    plane = new Mesh(planeGeometry, planeMaterial);
+    //plane.receiveShadow = true;
+    plane.rotation.x = -0.5;
+    plane.position.x = 200;
+    plane.rotation.y = -0.5;
+    plane.position.y = -200;
+    plane.position.z = -200;
+    plane.rotation.z = -0.5;
+    scene.add(plane);
+    console.log("Added Plane Primitive to scene...");
     sun = new gameObject(new THREE.SphereGeometry(6, 32, 32), 0, 0, 0);
     scene.add(sun);
     console.log("added sun");
