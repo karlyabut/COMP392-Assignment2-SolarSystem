@@ -10,8 +10,8 @@ var objects;
     var planet = (function (_super) {
         __extends(planet, _super);
         //CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++
-        function planet(geometry, x, y, z, rotationSpeed, distance, parentPosition) {
-            _super.call(this, geometry, x, y, z);
+        function planet(geometry, material, x, y, z, rotationSpeed, distance, parentPosition) {
+            _super.call(this, geometry, material, x, y, z);
             this._rotationSpeed = rotationSpeed;
             this._distance = distance;
             this._rotation = 0;

@@ -9,9 +9,10 @@ var objects;
     var gameObject = (function (_super) {
         __extends(gameObject, _super);
         //CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++
-        function gameObject(geometry, x, y, z) {
-            _super.call(this, geometry);
+        function gameObject(geometry, material, x, y, z) {
+            _super.call(this, geometry, material);
             this._geometry = geometry;
+            this._material = material;
             this.position.x = x;
             this.position.y = y;
             this.position.z = z;

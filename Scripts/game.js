@@ -1,9 +1,9 @@
 /// <reference path="reference.ts"/>
 // MAIN GAME FILE
-// Re-used code (COMP392-Lesson01-Part1) Last modified source: 18 days ago
-// Author: Tom Tsiliopoulos 
+// Re-used code (COMP392-Assignment1- CubeMan) Last modified source: 24 days ago
+// Author: Karl Eisen Yabut 
 //Last modified by: Karl Eisen Yabut
-//COMP392 - Advanced Graphics (Assignment 1 Cube Man)
+//COMP392 - Advanced Graphics (Assignment 2 Solar System)
 //Last commit: January 28, 2016 (completed project) / January 31, 2016 (added internal document)
 //****Note there will be a lot of commented out objects, tried something fun with it****
 var Scene = THREE.Scene;
@@ -61,6 +61,9 @@ var stats;
 var step = 0;
 var planeGeometry;
 var planeMaterial;
+var spehereMaterial;
+var cubeGeometry;
+var cubeMaterial;
 var texture;
 function init() {
     // Instantiate a new Scene object
@@ -86,48 +89,57 @@ function init() {
     addControl(control);
     // Add framerate stats
     addStatsObject();
-    planeGeometry = new PlaneGeometry(100, 100, 100);
-    planeMaterial = new LambertMaterial({ map: THREE.ImageUtils.loadTexture('images/notbad.png') });
+    planeGeometry = new PlaneGeometry(1500, 700, 1500);
+    planeMaterial = new LambertMaterial({ map: THREE.ImageUtils.loadTexture('images/space.png') });
     plane = new Mesh(planeGeometry, planeMaterial);
     //plane.receiveShadow = true;
-    plane.rotation.x = -0.5;
+    plane.rotation.x = -0.001953125;
     plane.position.x = 200;
-    plane.rotation.y = -0.5;
-    plane.position.y = -200;
+    plane.rotation.y = -0.77;
+    plane.position.y = -250;
+    //plane.rotation.z = -0.5;
     plane.position.z = -200;
-    plane.rotation.z = -0.5;
     scene.add(plane);
     console.log("Added Plane Primitive to scene...");
-    sun = new gameObject(new THREE.SphereGeometry(6, 32, 32), 0, 0, 0);
+    //****SKYBOX ATTEMPT
+    // cubeGeometry = new CubeGeometry(5000, 5000, 5000);
+    // //cubeMaterial = new LambertMaterial({color:0x000FF});
+    // //added texture
+    // cubeMaterial = new THREE.MeshPhongMaterial(
+    //     {map: THREE.ImageUtils.loadTexture('images/lol.png')}); 
+    // skybox = new Mesh(cubeGeometry, cubeMaterial);
+    // skybox.castShadow = true;
+    // scene.add(skybox);
+    // console.log("added skybox")
+    sun = new gameObject(new THREE.SphereGeometry(8, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/sun.png') }), 0, 0, 0);
     scene.add(sun);
     console.log("added sun");
     var sunLight = new THREE.PointLight(0xffffff, 2, 100);
     sun.add(sunLight);
-    zoom = new Array();
     // Planets
-    planet1 = new planet(new THREE.SphereGeometry(2, 32, 32), 10, 10, 10, -0.05, 25, sun.position);
+    planet1 = new planet(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/earth.png') }), 10, 10, 10, -0.05, 25, sun.position);
     scene.add(planet1);
     console.log("added planet");
     // Planets
-    planet2 = new planet(new THREE.SphereGeometry(2, 32, 32), 15, 15, 15, -0.015, 35, sun.position);
+    planet2 = new planet(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/mercury.png') }), 15, 15, 15, -0.015, 35, sun.position);
     scene.add(planet2);
     console.log("added planet");
     // Planets
-    planet3 = new planet(new THREE.SphereGeometry(2, 32, 32), 20, 20, 20, -0.005, 45, sun.position);
+    planet3 = new planet(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/venus.png') }), 20, 20, 20, -0.005, 45, sun.position);
     scene.add(planet3);
     console.log("added planet");
     // Planets
-    planet4 = new planet(new THREE.SphereGeometry(2, 32, 32), 25, 25, 25, -0.010, 55, sun.position);
+    planet4 = new planet(new THREE.SphereGeometry(4, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/jupiter.png') }), 25, 25, 25, -0.010, 55, sun.position);
     scene.add(planet4);
     console.log("added planet");
     // Planets
-    planet5 = new planet(new THREE.SphereGeometry(2, 32, 32), 30, 30, 30, -0.020, 65, sun.position);
+    planet5 = new planet(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/mars.png') }), 30, 30, 30, -0.020, 65, sun.position);
     scene.add(planet5);
     console.log("added planet");
-    moon1 = new planet(new THREE.SphereGeometry(1, 32, 32), 30, 30, 30, -0.020, 5, planet4.position);
+    moon1 = new planet(new THREE.SphereGeometry(1, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/moon.png') }), 30, 30, 30, -0.020, 5, planet4.position);
     scene.add(moon1);
     console.log("added planet");
-    moon2 = new planet(new THREE.SphereGeometry(1, 32, 32), 30, 30, 30, 1, 5, planet2.position);
+    moon2 = new planet(new THREE.SphereGeometry(1, 32, 32), new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('images/moon.png') }), 30, 30, 30, 0.020, 5, planet2.position);
     scene.add(moon2);
     console.log("added planet");
     document.body.appendChild(renderer.domElement);
@@ -163,7 +175,9 @@ function gameLoop() {
     planet5.update();
     moon1.update();
     moon2.update();
-    //control.zoomIn();
+    if (zoom) {
+        control.zoomIn();
+    }
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
     // render the scene
@@ -172,7 +186,7 @@ function gameLoop() {
 // Setup default renderer
 function setupRenderer() {
     renderer = new Renderer();
-    renderer.setClearColor(0x1a1a1a, 1.0);
+    renderer.setClearColor(0xEEEEEE, 1.0);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMapEnabled = true;
     console.log("Finished setting up Renderer...");

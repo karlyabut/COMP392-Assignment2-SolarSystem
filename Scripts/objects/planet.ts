@@ -11,8 +11,8 @@ module objects {
         private _position:Vector3;
         
         //CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++
-        constructor(geometry: THREE.Geometry, x:number, y:number, z:number, rotationSpeed:number, distance:number, parentPosition:Vector3) {
-            super(geometry, x, y, z);
+        constructor(geometry: THREE.Geometry, material: THREE.Material, x:number, y:number, z:number, rotationSpeed:number, distance:number, parentPosition:Vector3) {
+            super(geometry, material, x, y, z);
             this._rotationSpeed = rotationSpeed;
             this._distance = distance;
             this._rotation = 0;
