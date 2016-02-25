@@ -6,7 +6,9 @@
 
 //Last modified by: Karl Eisen Yabut
 //COMP392 - Advanced Graphics (Assignment 2 Solar System)
-//Last commit: January 28, 2016 (completed project) / January 31, 2016 (added internal document)
+//Commits: February 19, 2016 (started project, added sun and planets and added zoom in and out control)
+//         February 22, 2016 (added plane for background)
+//         February 24, 2016 (added texture and have the zoom follow the planet with moon)
 //****Note there will be a lot of commented out objects, tried something fun with it****
 
 import Scene = THREE.Scene;
